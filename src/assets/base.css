@@ -2,6 +2,8 @@
 
 :root {
   --bg: #F3FFF0;
+  --sec: #C9E4C2;
+  --tre: #DEF1D9;
   --fg: #1E221B;
 }
 
@@ -9,6 +11,10 @@ html {
   background: var(--bg);
   color: var(--fg);
   font-family: 'Roboto Slab', serif;
+}
+
+p {
+	text-align: justify;
 }
 
 body {
@@ -38,11 +44,6 @@ footer {
   }
 }
 
-main img {
-	width: 100%;
-	margin-bottom: 2em;
-}
-
 main {
 	padding-bottom: 2em;
 }
@@ -52,38 +53,4 @@ main {
 	flex-wrap: wrap;
 	justify-content: center;
 	margin: 0 auto;
-}
-
-.item {
-	box-sizing: border-box;
-	border: 5px solid var(--fg);
-	border-radius: 15px;
-	padding: 5px;
-	margin: 7px;
-	width: 100%;
-	max-width: 300px;
-	max-height: 400px;
-}
-
-.item a {
-	display: grid;
-	grid-template-rows: 2fr 75px;
-}
-
-.item img,
-.name img {
-	margin: 0;
-	border-radius: 10px;
-	object-fit: cover;
-	max-height: 300px;
-}
-
-.item img {
-}
-
-.item .name {
-	display: grid;
-	grid-template-columns: 50px auto;
-	grid-template-rows: 1fr;
-	align-items: center;
 }

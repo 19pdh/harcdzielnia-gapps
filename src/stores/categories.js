@@ -5,7 +5,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzkHXc1wa4QySAhhltyRa9Q
 export const useCategoriesStore = defineStore('categories', {
     state: () => ({
         isLoading: false,
-        categories: []
+        categories: {}
     }),
     actions: {
         async getCategories() {
@@ -13,7 +13,13 @@ export const useCategoriesStore = defineStore('categories', {
                 this.isLoading = true;
                 const response = await fetch(API_URL);
                 const actualData = await response.json();
-                this.categories = actualData
+                this.categories = actualData.reduce(
+                    (acc, {name, link}) => { 
+                        acc[name] = link
+                        return acc
+                    },
+                    {}
+                )
               } catch(e) {
                 console.error(e)
               } finally {
