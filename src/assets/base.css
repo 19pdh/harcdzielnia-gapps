@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+:root {
+  --bg: #F3FFF0;
+  --fg: #1E221B;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Roboto Slab', serif;
+}
+
+body {
+  max-width: 700px;
+  padding: 1ex;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+footer {
+  margin-bottom: 2em;
+}
+
+.list {
+  padding: 1ex;
+  border: 1px solid gray;
+}
+
+@media (max-width: 720px) {
+  header {
+    flex-direction: column;
+  }
+}
+
+main img {
+	width: 100%;
+	margin-bottom: 2em;
+}
+
+main {
+	padding-bottom: 2em;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.item {
+	box-sizing: border-box;
+	border: 5px solid var(--fg);
+	border-radius: 15px;
+	padding: 5px;
+	margin: 7px;
+	width: 100%;
+	max-width: 300px;
+	max-height: 400px;
+}
+
+.item a {
+	display: grid;
+	grid-template-rows: 2fr 75px;
+}
+
+.item img,
+.name img {
+	margin: 0;
+	border-radius: 10px;
+	object-fit: cover;
+	max-height: 300px;
+}
+
+.item img {
+}
+
+.item .name {
+	display: grid;
+	grid-template-columns: 50px auto;
+	grid-template-rows: 1fr;
+	align-items: center;
+}
