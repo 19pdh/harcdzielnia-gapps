@@ -16,7 +16,7 @@ function getImageLink(driveLink) {
   throw new Error(`Could not extract ID from Google Drive link: ${driveLink}`)
 }
 
-const category = ref("Inne")
+const category = ref("@")
 
 const setCategory = (cat) => {
   console.log(cat)
