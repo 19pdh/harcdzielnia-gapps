@@ -9,7 +9,7 @@ defineProps({
 <template>
     <div class="item">
           <a href="#">
-            <img :src="image">
+            <img height="300" :src="image">
             <div class="name">
                 <img :src="category" class="icon">
                 <p>{{ name }}</p>

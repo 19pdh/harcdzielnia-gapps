@@ -19,7 +19,6 @@ function getImageLink(driveLink) {
 const category = ref("@")
 
 const setCategory = (cat) => {
-  console.log(cat)
   category.value = cat
 }
 

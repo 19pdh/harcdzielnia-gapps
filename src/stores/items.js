@@ -16,7 +16,6 @@ export const useItemsStore = defineStore('items', {
                   download: true,
                   header: true,
                   complete: (results) => {
-                    console.log(results)
                     this.items = results.data
                       .map(row => ({
                         name: row["Nazwa + rozmiar"],
