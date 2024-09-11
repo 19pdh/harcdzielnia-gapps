@@ -7,15 +7,6 @@ import { useItemsStore } from '@/stores/items';
 import { ref, computed, onMounted } from 'vue';
 import { useCategoriesStore } from '@/stores/categories';
 
-function getImageLink(driveLink) {
-  const regex = /id=([^&]*)/
-  const match = driveLink.match(regex)
-  if (match.length == 2) {
-    return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`
-  }
-  throw new Error(`Could not extract ID from Google Drive link: ${driveLink}`)
-}
-
 const category = ref("@")
 
 const setCategory = (cat) => {
@@ -41,14 +32,15 @@ onMounted(() => store.getItems())
 <template>
         <CategoryList :category="category" @set-category="setCategory"/>
 
-<div class="container">
-<ItemCard 
-  v-for="item of filteredItems"
-  :key="item.timestamp"
-  :name="item.name" 
-  :image="getImageLink(item.photo)"
-  :category="categories[item.category]"
-/>
+<div v-if="filteredItems.length != 0" class="container">
+  <ItemCard 
+    v-for="item of filteredItems"
+    :key="item.timestamp"
+    :name="item.name"
+    :id="item.id"
+    :image="item.photo"
+    :category="categories[item.category]"
+  />
 </div>
-
+<div class="container" v-else><span>Tu pusto...</span></div>
 </template>

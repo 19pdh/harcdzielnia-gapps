@@ -11,7 +11,7 @@ import FilterView from '@/components/FilterView.vue'
     <p>mail: <a href="mailto:patryk.niedzwiedzinski@zhr.pl">patryk.niedzwiedzinski@zhr.pl</a></p>
     <p>albo przez tel. jak ktoś ma mój numer ;)</p>
     <h3>Mam za mały mundur!</h3>
-    <p>Jeżeli chcesz oddać za mundur, z którego wyrosłeś to wypełnij <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7l-Lbt_DENOUq9D5eBL5dw0KhOdIOHOGvlvKKtZ_ZFPI0GA/viewform">tą ankietę</a></p>
+    <p>Jeżeli chcesz oddać mundur, z którego wyrosłeś to wypełnij <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7l-Lbt_DENOUq9D5eBL5dw0KhOdIOHOGvlvKKtZ_ZFPI0GA/viewform">ten formularz</a></p>
     <hr>
     <FilterView/>
 </template>

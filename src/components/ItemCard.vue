@@ -1,5 +1,6 @@
 <script setup>
 defineProps({
+	id: Number,
     name: String,
     image: String,
     category: String
@@ -8,7 +9,7 @@ defineProps({
 
 <template>
     <div class="item">
-          <a href="#">
+          <a :href="`item/${id}`">
             <img height="300" :src="image">
             <div class="name">
                 <img :src="category" class="icon">
