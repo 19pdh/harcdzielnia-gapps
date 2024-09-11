@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 :root {
-  --bg: #F3FFF0;
-  --sec: #C9E4C2;
-  --tre: #DEF1D9;
-  --fg: #1E221B;
+  --bg: #f3fff0;
+  --sec: #c9e4c2;
+  --tre: #def1d9;
+  --fg: #1e221b;
 }
 
 html {
@@ -14,7 +14,7 @@ html {
 }
 
 p {
-	text-align: justify;
+  text-align: justify;
 }
 
 body {
@@ -45,12 +45,12 @@ footer {
 }
 
 main {
-	padding-bottom: 2em;
+  padding-bottom: 2em;
 }
 
 .container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
 }
