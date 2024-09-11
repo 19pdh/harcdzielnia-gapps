@@ -31,6 +31,7 @@ a {
   align-items: center;
   text-decoration: none;
   color: var(--fg);
+  font-weight: bolder;
 }
 
 a span {
