@@ -40,6 +40,13 @@ onMounted(() => {
 </template>
 
 <style scoped>
+div.filtering > aside {
+  padding: 0.5em;
+  border: 4px solid var(--fg);
+  border-radius: 0.75em;
+  margin-bottom: 2em;
+}
+
 button {
   list-style: none;
   display: flex;

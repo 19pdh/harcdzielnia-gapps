@@ -29,6 +29,5 @@ import FilterView from '@/components/FilterView.vue'
       >ten formularz</a
     >
   </p>
-  <hr />
   <FilterView />
 </template>

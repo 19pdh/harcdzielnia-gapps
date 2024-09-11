@@ -30,6 +30,7 @@ onMounted(() => store.getItems())
 </script>
 
 <template>
+  <h2>Lista umundurowania</h2>
   <CategoryList :category="category" @set-category="setCategory" />
 
   <div v-if="filteredItems.length != 0" class="container">
