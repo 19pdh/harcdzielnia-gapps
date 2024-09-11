@@ -20,8 +20,9 @@ export const useItemsStore = defineStore('items', {
   }),
   actions: {
     async getItems() {
+      if (this.items.length > 0) return
+      this.isLoading = true
       try {
-        this.isLoading = true
         Papa.parse(API_URL, {
           download: true,
           header: true,
@@ -45,5 +46,8 @@ export const useItemsStore = defineStore('items', {
         console.error(e)
       }
     }
+  },
+  persist: {
+    storage: sessionStorage
   }
 })

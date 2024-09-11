@@ -29,5 +29,7 @@ export const useCategoriesStore = defineStore('categories', {
       }
     }
   },
-  persist: true
+  persist: {
+    storage: sessionStorage
+  }
 })

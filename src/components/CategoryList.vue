@@ -31,7 +31,7 @@ onMounted(() => {
           :class="name == category ? 'active' : ''"
           @click="setCategory(name)"
         >
-          <img :src="link" height="40" />
+          <img :src="link" height="40" width="40" />
           <span>{{ name == '@' ? 'Wszystko' : name }}</span>
         </button>
       </div>
