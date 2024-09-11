@@ -13,7 +13,10 @@ onMounted(() => itemStore.getItems())
 </script>
 
 <template>
-  <RouterLink to="/">&lt; Wróć</RouterLink>
+  <RouterLink to="/">
+    <img src="@/assets/back.png" height="20" width="20" />
+    <span>Wróć</span></RouterLink
+  >
   <div v-if="thisItem">
     <h1>{{ thisItem.name }}</h1>
     <img :src="thisItem.photo" width="100%" />
@@ -21,3 +24,16 @@ onMounted(() => itemStore.getItems())
     <p>{{ thisItem.contact }}</p>
   </div>
 </template>
+
+<style scoped>
+a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+a span {
+  padding-left: 0.5em;
+}
+</style>
