@@ -10,8 +10,12 @@ export const useCategoriesStore = defineStore('categories', {
   }),
   actions: {
     async getCategories() {
+      if (Object.keys(this.categories).length > 0) {
+        console.log(this.categories)
+        return
+      }
+      this.isLoading = true
       try {
-        this.isLoading = true
         const response = await fetch(API_URL)
         const actualData = await response.json()
         this.categories = actualData.reduce((acc, { name, link }) => {
@@ -24,5 +28,6 @@ export const useCategoriesStore = defineStore('categories', {
         this.isLoading = false
       }
     }
-  }
+  },
+  persist: true
 })
