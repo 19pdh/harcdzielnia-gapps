@@ -11,7 +11,6 @@ export const useCategoriesStore = defineStore('categories', {
   actions: {
     async getCategories() {
       if (Object.keys(this.categories).length > 0) {
-        console.log(this.categories)
         return
       }
       this.isLoading = true
