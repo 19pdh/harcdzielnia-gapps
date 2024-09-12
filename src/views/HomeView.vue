@@ -25,7 +25,7 @@ import FilterView from '@/components/FilterView.vue'
   <p>
     Jeżeli chcesz oddać mundur, z którego wyrosłeś to wypełnij
     <a
-      href="https://docs.google.com/forms/d/e/1FAIpQLSc7l-Lbt_DENOUq9D5eBL5dw0KhOdIOHOGvlvKKtZ_ZFPI0GA/viewform"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSelaJDsMnUEU4GJ2W-RYuMRtKizXkiReLtFx1wb4A3XVwYUrg/viewform"
       >ten formularz</a
     >
   </p>
