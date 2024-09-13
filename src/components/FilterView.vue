@@ -17,6 +17,8 @@ const categoryStore = useCategoriesStore()
 
 const categories = computed(() => categoryStore.categories)
 
+const isLoading = computed(() => store.isLoading)
+
 const filteredItems = computed(() =>
   store.items.filter((el) => {
     if (category.value == '@') {
@@ -43,5 +45,6 @@ onMounted(() => store.getItems())
       :category="categories[item.category]"
     />
   </div>
-  <div class="container" v-else><span>Tu pusto...</span></div>
+  <div class="container" v-else-if="isLoading"><span>Ładowanie...</span></div>
+  <div class="container" v-else><span>Tutaj jeszcze nic nie ma...</span></div>
 </template>
