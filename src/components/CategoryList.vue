@@ -35,6 +35,7 @@ onMounted(() => {
           <span>{{ name == '@' ? 'Wszystko' : name }}</span>
         </button>
       </div>
+      <div v-else>Ładowanie...</div>
     </aside>
   </div>
 </template>

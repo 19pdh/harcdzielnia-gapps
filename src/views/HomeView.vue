@@ -1,8 +1,10 @@
 <script setup>
 import FilterView from '@/components/FilterView.vue'
+import AddItem from '@/components/AddItem.vue'
 </script>
 
 <template>
+  <AddItem />
   <h2>Co to harcdzielnia?</h2>
   <p>
     Jako drużynowy miałem przyjemność przyjmować wielu nowych ludzi do drużyny, ale za każdym razem
