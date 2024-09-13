@@ -21,6 +21,7 @@ onMounted(() => itemStore.getItems())
     <h1>{{ thisItem.name }}</h1>
     <img :src="thisItem.photo" width="100%" />
     <p>{{ thisItem.description }}</p>
+    <h2>Dane kontaktowe:</h2>
     <p>{{ thisItem.contact }}</p>
   </div>
 </template>
