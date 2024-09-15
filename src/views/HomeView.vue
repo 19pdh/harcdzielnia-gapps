@@ -7,29 +7,38 @@ import AddItem from '@/components/AddItem.vue'
   <AddItem />
   <h2>Co to harcdzielnia?</h2>
   <p>
-    Jako drużynowy miałem przyjemność przyjmować wielu nowych ludzi do drużyny, ale za każdym razem
-    pojawiał się problem, że trzeba kupić mundur. Z drugiej strony sam jako harcerz wyrosłem z wielu
-    mundurów. I co się stało z tymi za małymi mundurami? Leżały w szafie.
+    Jako drużynowy miałem przyjemność przyjmować wielu chłopaków do drużyny. Każdy nowy harcerz
+    potrzebuje munduru, a z drugiej strony wielu druhów i ja sam przez lata wyrosłem z wielu
+    mundurów. Za małe mundury lądowały na dnie szafy, a przecież wcale tak nie musi być.
   </p>
   <p>
-    Dlatego postanowiłem ogarnąć sprawę i stworzyć spis starych, ale sprawnych, mundurów, które
-    będzie można za darmo odzyskać, dać im drugie życie i uratować przed kurzem i zapomnieniem
-    gdzieś na dole szafy.
+    Harcdzielnia to przestrzeń wymiany – każdy może oddać mundur i dać mu szansę na drugie życie lub
+    w spisie znaleźć coś dla siebie, za darmo odebrać i uratować przed kurzem i zapomnieniem.
   </p>
+
   <h2>Jak to działa?</h2>
+  <h3>Mam mundur do oddania</h3>
   <p>
-    Poniżej znajduje się lista zebranych części umundurowania. Jeżeli ktoś jest w potrzebie to
-    kontaktuje się ze mną i ustalamy jakiś termin na spotkanie / podrzucenie munduru.
-  </p>
-  <p>mail: <a href="mailto:patryk.niedzwiedzinski@zhr.pl">patryk.niedzwiedzinski@zhr.pl</a></p>
-  <p>albo przez tel. jak ktoś ma mój numer ;)</p>
-  <h3>Mam za mały mundur!</h3>
-  <p>
-    Jeżeli chcesz oddać mundur, z którego wyrosłeś to wypełnij
+    Wypełnij
     <a
       href="https://docs.google.com/forms/d/e/1FAIpQLSelaJDsMnUEU4GJ2W-RYuMRtKizXkiReLtFx1wb4A3XVwYUrg/viewform"
       >ten formularz</a
-    >
+    >, a twój mundur będzie widoczny dla wszystkich odwiedzających harcdzielnię. W wiadomości podaj
+    proszę dane kontaktowe (mail/numer tel.), żebyśmy mogli umówić się na przekazanie munduru i
+    zrobić miejsce w Twojej szafie.
+  </p>
+
+  <h3>Szukam używanego munduru</h3>
+  <p>
+    Poniżej znajduje się lista zebranych części umundurowania. Jeżeli znajdziesz poniżej coś dla
+    siebie skontaktuj się przez dane kontaktowe (znajdziesz je na stronie munduru, po kliknięciu w
+    "kafelek")
+  </p>
+
+  <h3>W razie pytań</h3>
+  <p>
+    Kontakt do mnie:
+    <a href="mailto:patryk.niedzwiedzinski@zhr.pl">patryk.niedzwiedzinski@zhr.pl</a>
   </p>
   <FilterView />
 </template>
