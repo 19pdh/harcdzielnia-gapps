@@ -40,5 +40,9 @@ import AddItem from '@/components/AddItem.vue'
     Kontakt do mnie:
     <a href="mailto:patryk.niedzwiedzinski@zhr.pl">patryk.niedzwiedzinski@zhr.pl</a>
   </p>
+  <p>
+    (współ)Twórz harcdzielnię:
+    <a href="https://github.com/19pdh/harcdzielnia-gapps">kod źródłowy</a>
+  </p>
   <FilterView />
 </template>
