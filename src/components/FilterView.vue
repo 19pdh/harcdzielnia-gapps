@@ -6,7 +6,7 @@ import { useItemsStore } from '@/stores/items'
 import { ref, computed, onMounted } from 'vue'
 import { useCategoriesStore } from '@/stores/categories'
 
-const category = ref('@')
+const category = ref('Wszystko')
 
 const setCategory = (cat) => {
   category.value = cat
@@ -16,13 +16,18 @@ const store = useItemsStore()
 const categoryStore = useCategoriesStore()
 
 const categories = computed(() => categoryStore.categories)
+const customCategories = computed(() => categoryStore.customCategories.map((el) => el.name))
 
 const isLoading = computed(() => store.isLoading)
 
 const filteredItems = computed(() =>
   store.items.filter((el) => {
-    if (category.value == '@') {
+    if (category.value == 'Wszystko') {
       return true
+    }
+    if (category.value == 'Inne') {
+      // category not in categoryStore.customCategories
+      return !customCategories.value.includes(el.category)
     }
     return el.category == category.value
   })

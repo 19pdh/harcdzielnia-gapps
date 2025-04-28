@@ -7,35 +7,27 @@ const emit = defineEmits(['setCategory'])
 
 const setCategory = (name) => emit('setCategory', name)
 
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useCategoriesStore } from '../stores/categories.js'
 
 const store = useCategoriesStore()
 
 const categories = computed(() => store.categories)
-const isLoading = computed(() => store.isLoading)
-
-onMounted(() => {
-  store.getCategories()
-})
 </script>
 
 <template>
   <div class="filtering">
     <aside>
-      <div v-if="!isLoading">
-        <strong>Kategorie</strong>
-        <button
-          v-for="[name, link] in Object.entries(categories)"
-          :key="name"
-          :class="name == category ? 'active' : ''"
-          @click="setCategory(name)"
-        >
-          <img :src="link" height="40" width="40" />
-          <span>{{ name == '@' ? 'Wszystko' : name }}</span>
-        </button>
-      </div>
-      <div v-else>Ładowanie...</div>
+      <strong>Kategorie</strong>
+      <button
+        v-for="{ name, link } in categories"
+        :key="name"
+        :class="name == category ? 'active' : ''"
+        @click="setCategory(name)"
+      >
+        <img :src="link" height="40" width="40" />
+        <span>{{ name }}</span>
+      </button>
     </aside>
   </div>
 </template>

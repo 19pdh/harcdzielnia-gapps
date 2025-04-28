@@ -1,34 +1,21 @@
 import { defineStore } from 'pinia'
 
-const API_URL =
-  'https://script.google.com/macros/s/AKfycbzkHXc1wa4QySAhhltyRa9QCMYcPjvu4EgQPNNov_hth5U3iiNyrFwhCwCQCTnfwPj6/exec'
+const categoriesFiles = import.meta.glob('@/assets/categories/*.png', { eager: true })
+
+const customCategories = Object.entries(categoriesFiles).map(([path, _]) => {
+  const name = path.split('/').pop().split('.')[0]
+  return { name, link: new URL(path, import.meta.url) }
+})
+
+const categories = [
+  { name: 'Wszystko', link: new URL('@/assets/all.png', import.meta.url) },
+  ...customCategories,
+  { name: 'Inne', link: new URL('@/assets/other.png', import.meta.url) }
+]
 
 export const useCategoriesStore = defineStore('categories', {
   state: () => ({
-    isLoading: false,
-    categories: {}
-  }),
-  actions: {
-    async getCategories() {
-      if (Object.keys(this.categories).length > 0) {
-        return
-      }
-      this.isLoading = true
-      try {
-        const response = await fetch(API_URL)
-        const actualData = await response.json()
-        this.categories = actualData.reduce((acc, { name, link }) => {
-          acc[name] = link
-          return acc
-        }, {})
-      } catch (e) {
-        console.error(e)
-      } finally {
-        this.isLoading = false
-      }
-    }
-  },
-  persist: {
-    storage: sessionStorage
-  }
+    categories,
+    customCategories
+  })
 })
