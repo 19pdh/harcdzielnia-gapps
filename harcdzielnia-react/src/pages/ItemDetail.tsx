@@ -23,26 +23,16 @@ const ItemDetail: React.FC = () => {
 
   return (
     <div className="item-detail">
-      <Link to="/" className="back-link">
-        <img src={backImg} alt="Wróć" width="30" /> Wróć
+      <Link to="/" className="item-view-back-link">
+        <img src={backImg} alt="Wróć" width="20" height="20" />
+        <span>Wróć</span>
       </Link>
 
-      <h2>{item.name}</h2>
-
-      <div className="detail-content">
-        {item.photo && (
-          <div className="detail-image">
-             <img src={item.photo} alt={item.name} />
-          </div>
-        )}
-
-        <div className="detail-info">
-          <p><strong>Kategoria:</strong> {item.category}</p>
-          <p><strong>Opis:</strong> {item.description}</p>
-          <p><strong>Kontakt:</strong> {item.contact}</p>
-          <p><strong>Data dodania:</strong> {item.timestamp}</p>
-        </div>
-      </div>
+      <h1>{item.name}</h1>
+      <img src={item.photo} width="100%" alt={item.name} />
+      <p>{item.description}</p>
+      <h2>Dane kontaktowe:</h2>
+      <p>{item.contact}</p>
     </div>
   );
 };

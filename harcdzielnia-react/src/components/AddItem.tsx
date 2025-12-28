@@ -9,6 +9,7 @@ const AddItem: React.FC = () => {
           href="https://docs.google.com/forms/d/e/1FAIpQLSelaJDsMnUEU4GJ2W-RYuMRtKizXkiReLtFx1wb4A3XVwYUrg/viewform"
           target="_blank"
           rel="noopener noreferrer"
+          className="add-item-link"
         >
           <img src={addImg} width="50" height="50" alt="Add" />
           <span>Chcę oddać mundur!</span>
