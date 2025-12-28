@@ -13,7 +13,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, categoryIcon }) => {
     <div className="item-card">
       <Link to={`/item/${item.id}`}>
         {item.photo ? (
-           <img src={item.photo} alt={item.name} className="main-img" loading="lazy" />
+           <img src={item.photo} alt={item.name} className="main-img" height="300" loading="lazy" />
         ) : (
            <div className="placeholder">Brak zdjęcia</div>
         )}
