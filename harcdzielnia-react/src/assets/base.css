@@ -109,4 +109,5 @@ div.add-item-button {
   display: block;
   max-height: 65vh;
   max-width: 100%;
+  border-radius: 15px;
 }
