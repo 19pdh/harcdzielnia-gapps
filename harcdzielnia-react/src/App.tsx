@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Home from './pages/Home';
@@ -12,15 +12,10 @@ const App: React.FC = () => {
     <Provider store={store}>
       <Router>
         <header>
-          <Link to="/">
-            <img alt="Harcdzielnia logo" className="logo" src={logoLight} width="125" height="125" />
-          </Link>
-          <div className="wrapper">
-            <nav>
-              <Link to="/">Harcdzielnia</Link>
-              {' | '}
-              <Link to="/about">O nas</Link>
-            </nav>
+          <img src={logoLight} width="267" height="167" alt="Harcdzielnia logo" />
+          <div>
+            <h1 style={{ marginBottom: 0 }}>Harcdzielnia</h1>
+            <p style={{ marginTop: 0, textAlign: 'center' }}>Drugie życie mundurów</p>
           </div>
         </header>
 
