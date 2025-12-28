@@ -1,0 +1,52 @@
+.category-filtering {
+  /* Default mobile styles */
+}
+
+.category-filtering aside {
+  padding: 0.5em;
+  border: 4px solid var(--fg);
+  border-radius: 0.75em;
+  margin-bottom: 2em;
+}
+
+.category-filtering button {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.1em 0;
+  padding: 0.4em;
+  border-radius: 10px;
+  border-width: 0;
+  width: 100%;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--fg);
+}
+
+.category-filtering button span {
+  margin-left: 1em;
+  font-weight: bold; /* Added for visibility */
+}
+
+.category-filtering button.active {
+  background-color: var(--sec);
+}
+
+.category-filtering button:hover {
+  background-color: var(--tre);
+}
+
+@media screen and (min-width: 1200px) {
+  .category-filtering {
+    position: sticky;
+    top: 1em;
+  }
+  .category-filtering aside {
+    position: absolute;
+    right: 100%; /* Puts it to the left of the container */
+    width: 250px;
+    margin-right: 20px; /* Add some spacing */
+  }
+}
