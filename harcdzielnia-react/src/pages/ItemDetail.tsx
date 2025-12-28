@@ -29,7 +29,7 @@ const ItemDetail: React.FC = () => {
       </Link>
 
       <h1>{item.name}</h1>
-      <img src={item.photo} width="100%" alt={item.name} />
+      <img className="item-detail-img" src={item.photo} width="100%" alt={item.name} />
       <p>{item.description}</p>
       <h2>Dane kontaktowe:</h2>
       <p>{item.contact}</p>

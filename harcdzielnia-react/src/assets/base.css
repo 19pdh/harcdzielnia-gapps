@@ -103,3 +103,9 @@ div.add-item-button {
 .item-view-back-link span {
   padding-left: 0.5em;
 }
+
+.item-detail-img {
+  margin: 0 auto;
+  display: block;
+  max-height: 65vh;
+}
