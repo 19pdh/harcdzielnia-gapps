@@ -108,4 +108,5 @@ div.add-item-button {
   margin: 0 auto;
   display: block;
   max-height: 65vh;
+  max-width: 100%;
 }
