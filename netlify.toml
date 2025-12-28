@@ -1,5 +1,4 @@
 [build]
-  base = "harcdzielnia-react"
   publish = "dist"
   command = "npm run build"
 
