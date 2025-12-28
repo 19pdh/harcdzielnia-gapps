@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+:root {
+  --bg: #f3fff0;
+  --sec: #c9e4c2;
+  --tre: #def1d9;
+  --fg: #1e221b;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Roboto Slab', serif;
+}
+
+p {
+  text-align: justify;
+}
+
+body {
+  max-width: 700px;
+  padding: 1ex;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+footer {
+  margin-bottom: 2em;
+}
+
+.list {
+  padding: 1ex;
+  border: 1px solid gray;
+}
+
+@media (max-width: 720px) {
+  header {
+    flex-direction: column;
+  }
+}
+
+main {
+  padding-bottom: 2em;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* AddItem.vue styles */
+div.add-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.add-item-button {
+  background-color: var(--tre);
+  padding: 0.5ex;
+  margin: 1.5em 0;
+  border-radius: 1ex;
+  border: 4px solid var(--fg);
+}
+
+.add-item-link {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.add-item-link * {
+  padding: 0.5ex;
+  margin: auto;
+}
+
+/* AboutView.vue styles */
+@media (min-width: 1024px) {
+  .about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ItemView.vue (ItemDetail) styles */
+.item-view-back-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--fg);
+  font-weight: bolder;
+}
+
+.item-view-back-link span {
+  padding-left: 0.5em;
+}
+
+.item-detail-img {
+  margin: 0 auto;
+  display: block;
+  max-height: 65vh;
+  max-width: 100%;
+  border-radius: 15px;
+}
