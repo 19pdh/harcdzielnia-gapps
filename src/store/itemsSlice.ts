@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createAction, type PayloadAction } from '@reduxjs/toolkit';
 import Papa from 'papaparse';
 
 // Define the shape of an Item
@@ -40,6 +40,8 @@ function getImageLink(driveLink: string): string {
   console.warn(`Could not extract ID from Google Drive link: ${driveLink}`);
   return '';
 }
+
+export const removeItem = createAction<number>('items/removeItem');
 
 export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
   return new Promise<Item[]>((resolve, reject) => {
@@ -85,6 +87,9 @@ const itemsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(removeItem, (state, action: PayloadAction<number>) => {
+        state.items = state.items.filter((item) => item.id !== action.payload);
+      })
       .addCase(fetchItems.pending, (state) => {
         state.isLoading = true;
         state.error = null;
