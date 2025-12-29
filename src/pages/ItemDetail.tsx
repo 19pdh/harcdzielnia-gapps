@@ -75,22 +75,25 @@ const ItemDetail: React.FC = () => {
       <h2>Dane kontaktowe:</h2>
       <p>{item.contact}</p>
 
-      <div className="add-item-button" style={{ display: 'inline-block', cursor: 'pointer' }}>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            margin: 0,
-            fontSize: 'inherit',
-            fontFamily: 'inherit',
-            cursor: 'pointer',
-            color: 'inherit',
-          }}
-        >
-          Odbieram
-        </button>
+      <div
+        className="add-item-button"
+        role="button"
+        tabIndex={0}
+        onClick={() => setIsModalOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            setIsModalOpen(true);
+          }
+        }}
+        style={{
+          display: 'inline-block',
+          cursor: 'pointer',
+          borderWidth: '2px',
+          marginTop: '2em',
+          marginBottom: '2em',
+        }}
+      >
+        Odbieram
       </div>
 
       <Modal isOpen={isModalOpen} onClose={handleClose}>
@@ -98,7 +101,9 @@ const ItemDetail: React.FC = () => {
           <div style={{ textAlign: 'center' }}>
             <h2>Sukces!</h2>
             <p>Przedmiot został oznaczony jako odebrany.</p>
-            <button onClick={handleClose}>Zamknij</button>
+            <button className="modal-btn modal-btn-secondary" onClick={handleClose}>
+              Zamknij
+            </button>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
@@ -117,8 +122,12 @@ const ItemDetail: React.FC = () => {
               <p style={{ color: 'red', margin: 0 }}>Niepoprawne hasło</p>
             )}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1em' }}>
-              <button onClick={handleClose}>Anuluj</button>
-              <button onClick={handleConfirm}>Zatwierdź</button>
+              <button className="modal-btn modal-btn-secondary" onClick={handleClose}>
+                Anuluj
+              </button>
+              <button className="modal-btn modal-btn-primary" onClick={handleConfirm}>
+                Zatwierdź
+              </button>
             </div>
           </div>
         )}

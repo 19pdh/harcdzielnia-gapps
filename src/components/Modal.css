@@ -32,3 +32,41 @@
   cursor: pointer;
   color: #333;
 }
+
+.modal-btn {
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+  font-family: inherit;
+}
+
+.modal-btn:focus,
+.modal-btn:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.modal-btn-primary {
+  background-color: var(--tre, #def1d9);
+  color: var(--fg, #1e221b);
+  border: 1px solid var(--fg, #1e221b);
+}
+
+.modal-btn-primary:hover {
+  background-color: var(--sec, #c9e4c2);
+  border-color: #646cff;
+}
+
+.modal-btn-secondary {
+  background-color: transparent;
+  color: var(--fg, #1e221b);
+  border: 1px solid #ccc;
+}
+
+.modal-btn-secondary:hover {
+  border-color: #646cff;
+  background-color: #f0f0f0;
+}
