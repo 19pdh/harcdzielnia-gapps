@@ -15,12 +15,14 @@ export interface Item {
 
 interface ItemsState {
   items: Item[];
+  selectedCategory: string;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: ItemsState = {
   items: [],
+  selectedCategory: 'Wszystko',
   isLoading: false,
   error: null,
 };
@@ -76,7 +78,11 @@ export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
 const itemsSlice = createSlice({
   name: 'items',
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedCategory(state, action: PayloadAction<string>) {
+      state.selectedCategory = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchItems.pending, (state) => {
@@ -94,4 +100,5 @@ const itemsSlice = createSlice({
   },
 });
 
+export const { setSelectedCategory } = itemsSlice.actions;
 export default itemsSlice.reducer;

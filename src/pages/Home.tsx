@@ -1,17 +1,15 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../store/store';
-import { fetchItems } from '../store/itemsSlice';
+import { fetchItems, setSelectedCategory } from '../store/itemsSlice';
 import ItemCard from '../components/ItemCard';
 import CategoryList from '../components/CategoryList';
 import AddItem from '../components/AddItem';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { items, isLoading } = useSelector((state: RootState) => state.items);
+  const { items, isLoading, selectedCategory } = useSelector((state: RootState) => state.items);
   const { categories } = useSelector((state: RootState) => state.categories);
-
-  const [selectedCategory, setSelectedCategory] = useState('Wszystko');
 
   useEffect(() => {
     if (items.length === 0) {
@@ -29,14 +27,6 @@ const Home: React.FC = () => {
   }, [categories]);
 
   const filteredItems = items.filter((item) => {
-    // Logic from FilterView.vue
-    // If selectedCategory is 'Inne', we show items whose category is NOT in the custom categories list.
-    // Wait, 'Inne' category logic in Vue was:
-    // if (category.value == 'Inne') return !customCategories.value.includes(el.category)
-
-    // Check if 'Inne' logic is needed.
-    // 'Wszystko' includes everything.
-
     if (selectedCategory === 'Wszystko') {
        return true;
     }
@@ -52,6 +42,10 @@ const Home: React.FC = () => {
 
     return item.category === selectedCategory;
   });
+
+  const handleSelectCategory = (category: string) => {
+    dispatch(setSelectedCategory(category));
+  };
 
   return (
     <div className="home">
@@ -116,7 +110,7 @@ const Home: React.FC = () => {
       <CategoryList
         categories={categories}
         selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
+        onSelectCategory={handleSelectCategory}
       />
 
       {isLoading ? (
