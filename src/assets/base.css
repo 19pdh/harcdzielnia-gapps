@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
 
 :root {
   --bg: #f3fff0;
@@ -10,7 +10,7 @@
 html {
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
 }
 
 p {
@@ -68,6 +68,27 @@ div.add-item-button {
   margin: 1.5em 0;
   border-radius: 1ex;
   border: 4px solid var(--fg);
+}
+
+button {
+  background-color: var(--tre);
+  border: none;
+  border-radius: 8px;
+  padding: 1ex 1em;
+  /* font-size: 1em; */
+  font-weight: bold;
+  cursor: pointer;
+  border: 3px solid var(--fg);
+}
+
+button:hover,
+button:focus,
+button:focus-visible {
+  background-color: var(--sec);
+}
+
+button:active {
+  background-color: var(--bg);
 }
 
 .add-item-link {

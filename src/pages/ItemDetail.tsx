@@ -23,10 +23,14 @@ const ItemDetail: React.FC = () => {
 
   return (
     <div className="item-detail">
-      <Link to="/" className="item-view-back-link">
+      <button
+        type="button"
+        className="item-view-back-link"
+        onClick={() => window.history.back()}
+      >
         <img src={backImg} alt="Wróć" width="20" height="20" />
         <span>Wróć</span>
-      </Link>
+      </button>
 
       <h1>{item.name}</h1>
       <img className="item-detail-img" src={item.photo} alt={item.name} />
