@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '../store/store';
-import { fetchItems } from '../store/itemsSlice';
-import backImg from '../assets/back.png';
+import React, { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState, AppDispatch } from "../store/store";
+import { fetchItems } from "../store/itemsSlice";
+import backImg from "../assets/back.png";
 
 const ItemDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

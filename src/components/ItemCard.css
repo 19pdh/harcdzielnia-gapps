@@ -9,6 +9,10 @@
   max-height: 400px;
 }
 
+.item-card:hover {
+  background-color: var(--tre);
+}
+
 .item-card a {
   display: grid;
   grid-template-rows: 2fr 75px;
