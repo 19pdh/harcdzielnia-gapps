@@ -145,3 +145,43 @@ button:active {
   max-width: 100%;
   border-radius: 15px;
 }
+
+.item-detail {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+img.item-detail-icon {
+  width: 3.5em;
+  height: 3.5em;
+}
+
+.item-detail-title {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .item-detail {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* place image in left column and span rows */
+  .item-detail-img {
+    grid-column: 1 / 2;
+    grid-row: 1 / 8;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* put text content on the right column */
+  .item-detail > h1,
+  .item-detail > p,
+  .item-detail > div {
+    grid-column: 2 / 3;
+  }
+}

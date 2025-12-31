@@ -38,7 +38,7 @@
   background-color: var(--tre);
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1230px) {
   .category-filtering {
     position: sticky;
     top: 1em;
@@ -46,7 +46,7 @@
   .category-filtering aside {
     position: absolute;
     right: 100%; /* Puts it to the left of the container */
-    width: 250px;
+    width: 200px;
     margin-right: 20px; /* Add some spacing */
   }
 }

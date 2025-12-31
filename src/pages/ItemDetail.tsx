@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../store/store";
@@ -12,6 +12,17 @@ const ItemDetail: React.FC = () => {
 
   const item = items.find((i) => i.id === Number(id));
 
+  const { categories } = useSelector((state: RootState) => state.categories);
+
+  // Create a map for quick category image lookup
+  const categoryMap = useMemo(() => {
+    const map: Record<string, string> = {};
+    categories.forEach((cat) => {
+      map[cat.name] = cat.link;
+    });
+    return map;
+  }, [categories]);
+
   useEffect(() => {
     if (items.length === 0) {
       dispatch(fetchItems());
@@ -22,7 +33,7 @@ const ItemDetail: React.FC = () => {
   if (!item) return <div>Nie znaleziono przedmiotu.</div>;
 
   return (
-    <div className="item-detail">
+    <div>
       <button
         type="button"
         className="item-view-back-link"
@@ -32,11 +43,23 @@ const ItemDetail: React.FC = () => {
         <span>Wróć</span>
       </button>
 
-      <h1>{item.name}</h1>
-      <img className="item-detail-img" src={item.photo} alt={item.name} />
-      <p>{item.description}</p>
-      <h2>Dane kontaktowe:</h2>
-      <p>{item.contact}</p>
+      <div className="item-detail">
+        <div>
+          <img
+            src={categoryMap[item.category]}
+            className="item-detail-icon"
+            alt=""
+            aria-hidden="true"
+          />
+          <h1 className="item-detail-title">{item.name}</h1>
+        </div>
+        <img className="item-detail-img" src={item.photo} alt={item.name} />
+        <p>{item.description || <i>Brak opisu</i>}</p>
+        <div>
+          <h2>Dane kontaktowe:</h2>
+          <p>{item.contact}</p>
+        </div>
+      </div>
     </div>
   );
 };
