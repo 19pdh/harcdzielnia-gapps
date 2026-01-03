@@ -6,3 +6,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[template.environment]
+  VITE_GOOGLE_SHEETS_URL = "Link do publicznej wersji Arkusza Google z odpowiedziami (Plik -> Udostępnij -> Opublikuj w internecie)"
+  VITE_GOOGLE_FORM_URL = "Link do Formularza Google"
