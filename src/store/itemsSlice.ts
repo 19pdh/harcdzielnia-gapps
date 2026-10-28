@@ -32,25 +32,8 @@ const API_URL =
 
 export const GAS_WEBAPP_URL = import.meta.env.VITE_GAS_WEBAPP_URL || '';
 
-function parseEuropeanDate(dateStr: string): Date {
-  let date = new Date(dateStr);
-  if (!isNaN(date.getTime())) return date;
-
-  // Fallback for DD.MM.YYYY HH:mm:ss without custom complex regex
-  const parts = String(dateStr).split(/[\s.\-/:]+/);
-  if (parts.length >= 3) {
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1; // 0-based
-    const year = parseInt(parts[2], 10);
-    const hour = parts[3] ? parseInt(parts[3], 10) : 0;
-    const min = parts[4] ? parseInt(parts[4], 10) : 0;
-    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
-
-    date = new Date(year, month, day, hour, min, sec);
-    if (!isNaN(date.getTime())) return date;
-  }
-
-  return new Date(NaN);
+function parseDate(dateStr: string): Date {
+  return new Date(String(dateStr).replace(' ', 'T'));
 }
 
 function getImageLink(driveLink: string): string {
@@ -75,7 +58,7 @@ export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .map((row: any) => {
               // Parse the date to extract a unique ID (unix timestamp in string format)
-              const timestampDate = parseEuropeanDate(String(row['Sygnatura czasowa']));
+              const timestampDate = parseDate(row['Sygnatura czasowa']);
               const id = !isNaN(timestampDate.getTime())
                 ? Math.floor(timestampDate.getTime() / 1000).toString()
                 : '';
