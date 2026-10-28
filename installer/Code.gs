@@ -1,4 +1,4 @@
-const SECRET = "HARCDZIELNIA_SECRET"; // Change this to a secure random string in production
+const getSecret = () => PropertiesService.getScriptProperties().getProperty("SECRET_KEY") || "DEFAULT_SECRET";
 const START_DATE = new Date("2024-01-01T00:00:00Z").getTime() / 1000;
 // Base29 Alphabet (excluding O, 0, I, L, 1, Q, V)
 const ALPHABET = "23456789ABCDEFGHJKMNPRSTUWXYZ";
@@ -17,7 +17,7 @@ function encodeTimestamp(timestampMs) {
   let value = unixSeconds - START_DATE;
   if (value < 0) value = 0;
 
-  const secretHash = getSecretHash(SECRET);
+  const secretHash = getSecretHash(getSecret());
   // Add a check digit based on the secret content to prevent guessing
   const checkDigitValue = (value + secretHash) % ALPHABET.length;
 
@@ -51,7 +51,7 @@ function decodeCode(code) {
     value = value * ALPHABET.length + index;
   }
 
-  const secretHash = getSecretHash(SECRET);
+  const secretHash = getSecretHash(getSecret());
   const expectedCheckDigitValue = (value + secretHash) % ALPHABET.length;
   if (ALPHABET[expectedCheckDigitValue] !== checkChar) {
     return null; // Invalid check digit
@@ -61,22 +61,21 @@ function decodeCode(code) {
 }
 
 function parseEuropeanDate(dateStr) {
-  // Try to parse standard format first
+  // Try to parse standard ISO/JS formats first
   let date = new Date(dateStr);
   if (!isNaN(date.getTime())) return date;
 
-  // Try to parse DD.MM.YYYY HH:mm:ss
-  const regex = /^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/;
-  const match = dateStr.match(regex);
-  if (match) {
-    const day = parseInt(match[1], 10);
-    const month = parseInt(match[2], 10) - 1; // months are 0-based in JS
-    const year = parseInt(match[3], 10);
-    const hour = match[4] ? parseInt(match[4], 10) : 0;
-    const minute = match[5] ? parseInt(match[5], 10) : 0;
-    const second = match[6] ? parseInt(match[6], 10) : 0;
+  // Fallback for DD.MM.YYYY HH:mm:ss without regex
+  const parts = String(dateStr).split(/[\s.\-\/:]+/);
+  if (parts.length >= 3) {
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // 0-based
+    const year = parseInt(parts[2], 10);
+    const hour = parts[3] ? parseInt(parts[3], 10) : 0;
+    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
 
-    date = new Date(year, month, day, hour, minute, second);
+    date = new Date(year, month, day, hour, min, sec);
     if (!isNaN(date.getTime())) return date;
   }
 

@@ -36,17 +36,17 @@ function parseEuropeanDate(dateStr: string): Date {
   let date = new Date(dateStr);
   if (!isNaN(date.getTime())) return date;
 
-  const regex = /^(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/;
-  const match = dateStr.match(regex);
-  if (match) {
-    const day = parseInt(match[1], 10);
-    const month = parseInt(match[2], 10) - 1;
-    const year = parseInt(match[3], 10);
-    const hour = match[4] ? parseInt(match[4], 10) : 0;
-    const minute = match[5] ? parseInt(match[5], 10) : 0;
-    const second = match[6] ? parseInt(match[6], 10) : 0;
+  // Fallback for DD.MM.YYYY HH:mm:ss without custom complex regex
+  const parts = String(dateStr).split(/[\s.\-/:]+/);
+  if (parts.length >= 3) {
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // 0-based
+    const year = parseInt(parts[2], 10);
+    const hour = parts[3] ? parseInt(parts[3], 10) : 0;
+    const min = parts[4] ? parseInt(parts[4], 10) : 0;
+    const sec = parts[5] ? parseInt(parts[5], 10) : 0;
 
-    date = new Date(year, month, day, hour, minute, second);
+    date = new Date(year, month, day, hour, min, sec);
     if (!isNaN(date.getTime())) return date;
   }
 
