@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 
 // Define the shape of an Item
 export interface Item {
-  id: number;
+  id: string; // Unix timestamp string
   name: string;
   category: string;
   contact: string;
@@ -30,6 +30,29 @@ const initialState: ItemsState = {
 const API_URL =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vQkRE0FgqHYM0XrQPXZJjV_wslDSh4zdXzPmWUh2myEe5ykF4KA5FsxTSw2pDouf23sdLPrMvJz1xGp/pub?output=csv';
 
+export const GAS_WEBAPP_URL = import.meta.env.VITE_GAS_WEBAPP_URL || '';
+
+function parseEuropeanDate(dateStr: string): Date {
+  let date = new Date(dateStr);
+  if (!isNaN(date.getTime())) return date;
+
+  const regex = /^(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/;
+  const match = dateStr.match(regex);
+  if (match) {
+    const day = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10) - 1;
+    const year = parseInt(match[3], 10);
+    const hour = match[4] ? parseInt(match[4], 10) : 0;
+    const minute = match[5] ? parseInt(match[5], 10) : 0;
+    const second = match[6] ? parseInt(match[6], 10) : 0;
+
+    date = new Date(year, month, day, hour, minute, second);
+    if (!isNaN(date.getTime())) return date;
+  }
+
+  return new Date(NaN);
+}
+
 function getImageLink(driveLink: string): string {
   const regex = /[-\w]{25,}(?!.*[-\w]{25,})/;
   const match = driveLink.match(regex);
@@ -48,21 +71,28 @@ export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
       header: true,
       complete: (results) => {
         try {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const items = results.data
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .map((row: any, idx: number) => ({
-              id: idx + 1,
-              name: row['Nazwa + rozmiar'],
+            .map((row: any) => {
+              // Parse the date to extract a unique ID (unix timestamp in string format)
+              const timestampDate = parseEuropeanDate(String(row['Sygnatura czasowa']));
+              const id = !isNaN(timestampDate.getTime())
+                ? Math.floor(timestampDate.getTime() / 1000).toString()
+                : '';
+
+              return {
+                id,
+                name: row['Nazwa + rozmiar'],
               category: row['Co chcesz oddać?'],
               contact: row['Dane kontaktowe - jak odebrać?'],
               photo: row['Zdjęcie'] ? getImageLink(row['Zdjęcie']) : '',
-              description: row['Opis'],
-              taken: row['Odebrane'],
-              timestamp: row['Sygnatura czasowa'],
-            }))
+                description: row['Opis'],
+                taken: row['Odebrane'],
+                timestamp: row['Sygnatura czasowa'],
+              };
+            })
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .filter((item: any) => item.taken === '' || item.taken === undefined);
+            .filter((item: any) => item.id !== '' && (item.taken === '' || item.taken === undefined));
           resolve(items);
         } catch (e) {
           reject(e);

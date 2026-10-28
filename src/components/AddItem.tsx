@@ -1,10 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '../store/store';
+import { fetchItems, GAS_WEBAPP_URL } from '../store/itemsSlice';
 import addImg from '../assets/add.png';
+import Modal from './Modal';
 
 const AddItem: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [code, setCode] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+    setCode('');
+    setStatus('idle');
+    setErrorMessage('');
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!code) return;
+
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch(GAS_WEBAPP_URL, {
+        method: 'POST',
+        body: JSON.stringify({ code }),
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        }
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        dispatch(fetchItems()); // Refetch to update the UI
+        setTimeout(() => {
+          handleCloseModal();
+        }, 1500);
+      } else {
+        setStatus('error');
+        setErrorMessage(data.error || 'Wystąpił błąd podczas weryfikacji kodu.');
+      }
+    } catch {
+      setStatus('error');
+      setErrorMessage('Wystąpił błąd połączenia z serwerem.');
+    }
+  };
+
   return (
     <div className="add-item">
-      <div className="add-item-button">
+      <div className="pickup-item-button" role="button" tabIndex={0} onClick={handleOpenModal} onKeyDown={(e) => e.key === 'Enter' && handleOpenModal()}>
+        <div className="add-item-link">
+          <span style={{ fontSize: '1.2em' }}>Odbieram</span>
+        </div>
+      </div>
+
+      <div className="add-item-button" style={{ transform: 'scale(0.85)' }}>
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSelaJDsMnUEU4GJ2W-RYuMRtKizXkiReLtFx1wb4A3XVwYUrg/viewform"
           target="_blank"
@@ -12,9 +73,32 @@ const AddItem: React.FC = () => {
           className="add-item-link"
         >
           <img src={addImg} width="50" height="50" alt="Add" />
-          <span>Chcę oddać mundur!</span>
+          <span>Oddaj mundur</span>
         </a>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Odbiór munduru">
+        <form onSubmit={handleSubmit}>
+          <p>Przepisz kod z munduru (np. z naklejki lub taśmy), aby potwierdzić jego odbiór.</p>
+          <input
+            type="text"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="Wpisz kod..."
+            style={{ padding: '8px', fontSize: '1.1em', width: '100%', marginBottom: '16px', boxSizing: 'border-box' }}
+            autoFocus
+          />
+          {status === 'error' && <p style={{ color: 'red', marginTop: '0' }}>{errorMessage}</p>}
+          {status === 'success' && <p style={{ color: 'green', marginTop: '0', fontWeight: 'bold' }}>Mundur odebrany pomyślnie!</p>}
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
+            <button type="button" className="modal-btn modal-btn-secondary" onClick={handleCloseModal}>Anuluj</button>
+            <button type="submit" className="modal-btn modal-btn-primary" disabled={status === 'loading' || !code}>
+              {status === 'loading' ? 'Sprawdzanie...' : 'Odbierz'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const ItemDetail: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items, isLoading } = useSelector((state: RootState) => state.items);
 
-  const item = items.find((i) => i.id === Number(id));
+  const item = items.find((i) => i.id === id);
 
   const { categories } = useSelector((state: RootState) => state.categories);
 
