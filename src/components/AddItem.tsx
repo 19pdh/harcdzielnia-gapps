@@ -73,7 +73,7 @@ const AddItem: React.FC = () => {
 
       <div className="pickup-item-button" role="button" tabIndex={0} onClick={handleOpenModal} onKeyDown={(e) => e.key === 'Enter' && handleOpenModal()}>
         <div className="pickup-item-link">
-          <span>Odbierz mundur</span>
+          <span>Oznacz jako odebrane</span>
         </div>
       </div>
 
