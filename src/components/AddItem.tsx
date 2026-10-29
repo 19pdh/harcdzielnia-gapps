@@ -59,13 +59,7 @@ const AddItem: React.FC = () => {
 
   return (
     <div className="add-item">
-      <div className="pickup-item-button" role="button" tabIndex={0} onClick={handleOpenModal} onKeyDown={(e) => e.key === 'Enter' && handleOpenModal()}>
-        <div className="add-item-link">
-          <span style={{ fontSize: '1.2em' }}>Odbieram</span>
-        </div>
-      </div>
-
-      <div className="add-item-button" style={{ transform: 'scale(0.85)' }}>
+      <div className="add-item-button">
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSelaJDsMnUEU4GJ2W-RYuMRtKizXkiReLtFx1wb4A3XVwYUrg/viewform"
           target="_blank"
@@ -75,6 +69,12 @@ const AddItem: React.FC = () => {
           <img src={addImg} width="50" height="50" alt="Add" />
           <span>Oddaj mundur</span>
         </a>
+      </div>
+
+      <div className="pickup-item-button" role="button" tabIndex={0} onClick={handleOpenModal} onKeyDown={(e) => e.key === 'Enter' && handleOpenModal()}>
+        <div className="pickup-item-link">
+          <span>Odbierz mundur</span>
+        </div>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Odbiór munduru">
