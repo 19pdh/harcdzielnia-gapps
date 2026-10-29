@@ -208,3 +208,21 @@ img.item-detail-icon {
     grid-column: 2 / 3;
   }
 }
+
+/* Pickup Input styling */
+.pickup-input {
+  padding: 8px;
+  font-size: 1.1em;
+  width: 100%;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  background-color: var(--bg);
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  border-radius: 8px;
+}
+.pickup-input:focus {
+  outline: none;
+  border-color: var(--fg-light);
+  background-color: var(--tre);
+}

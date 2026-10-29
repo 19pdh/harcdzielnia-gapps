@@ -85,7 +85,7 @@ const AddItem: React.FC = () => {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             placeholder="Wpisz kod..."
-            style={{ padding: '8px', fontSize: '1.1em', width: '100%', marginBottom: '16px', boxSizing: 'border-box' }}
+            className="pickup-input"
             autoFocus
           />
           {status === 'error' && <p style={{ color: 'red', marginTop: '0' }}>{errorMessage}</p>}
@@ -94,7 +94,7 @@ const AddItem: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
             <button type="button" className="modal-btn modal-btn-secondary" onClick={handleCloseModal}>Anuluj</button>
             <button type="submit" className="modal-btn modal-btn-primary" disabled={status === 'loading' || !code}>
-              {status === 'loading' ? 'Sprawdzanie...' : 'Odbierz'}
+              {status === 'loading' ? 'Sprawdzanie...' : 'Oznacz jako odebrane'}
             </button>
           </div>
         </form>
