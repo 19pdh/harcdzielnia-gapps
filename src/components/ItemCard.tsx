@@ -11,7 +11,7 @@ interface ItemCardProps {
 const ItemCard: React.FC<ItemCardProps> = ({ item, categoryIcon }) => {
   return (
     <div className="item-card">
-      <Link to={`/item/${item.id}`}>
+      <Link to={`/item/${item.id}/${encodeURIComponent(item.name.replace(/\s+/g, '-').toLowerCase())}`}>
         {item.photo ? (
            <img src={item.photo} alt={item.name} className="main-img" height="300" loading="lazy" />
         ) : (

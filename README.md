@@ -1,3 +1,27 @@
+# Harcdzielnia - Frontend and Apps Script
+
+This project contains the React frontend and Google Apps Script backend for Harcdzielnia.
+
+## Environment Variables
+
+To run this project locally or deploy it, you will need to add the following environment variable to your `.env` or deployment settings:
+
+`VITE_GAS_WEBAPP_URL` - The Web App URL of your deployed Google Apps Script
+
+## Google Apps Script Deployment
+
+To set up the backend for the stateless pickup codes:
+1. Open the linked Google Sheet where form responses are saved.
+2. Go to **Extensions > Apps Script** and copy the contents of `installer/Code.gs` into the editor.
+3. In the Apps Script editor, go to **Project Settings** (gear icon) and under **Script Properties** add a new property:
+   - Property: `SECRET_KEY`
+   - Value: `Your_Very_Long_Random_Secret_String_Here`
+4. Click **Deploy > New deployment**, select **Web app**.
+5. Give access to **Anyone**.
+6. Copy the **Web app URL** and save it as your `VITE_GAS_WEBAPP_URL` environment variable for your frontend.
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

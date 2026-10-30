@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 
 // Define the shape of an Item
 export interface Item {
-  id: number;
+  id: string; // Unix timestamp string
   name: string;
   category: string;
   contact: string;
@@ -30,6 +30,12 @@ const initialState: ItemsState = {
 const API_URL =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vQkRE0FgqHYM0XrQPXZJjV_wslDSh4zdXzPmWUh2myEe5ykF4KA5FsxTSw2pDouf23sdLPrMvJz1xGp/pub?output=csv';
 
+export const GAS_WEBAPP_URL = import.meta.env.VITE_GAS_WEBAPP_URL || '';
+
+function parseDate(dateStr: string): Date {
+  return new Date(String(dateStr).replace(' ', 'T'));
+}
+
 function getImageLink(driveLink: string): string {
   const regex = /[-\w]{25,}(?!.*[-\w]{25,})/;
   const match = driveLink.match(regex);
@@ -48,21 +54,28 @@ export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
       header: true,
       complete: (results) => {
         try {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const items = results.data
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .map((row: any, idx: number) => ({
-              id: idx + 1,
-              name: row['Nazwa + rozmiar'],
+            .map((row: any) => {
+              // Parse the date to extract a unique ID (unix timestamp in string format)
+              const timestampDate = parseDate(row['Sygnatura czasowa']);
+              const id = !isNaN(timestampDate.getTime())
+                ? Math.floor(timestampDate.getTime() / 1000).toString()
+                : '';
+
+              return {
+                id,
+                name: row['Nazwa + rozmiar'],
               category: row['Co chcesz oddać?'],
               contact: row['Dane kontaktowe - jak odebrać?'],
               photo: row['Zdjęcie'] ? getImageLink(row['Zdjęcie']) : '',
-              description: row['Opis'],
-              taken: row['Odebrane'],
-              timestamp: row['Sygnatura czasowa'],
-            }))
+                description: row['Opis'],
+                taken: row['Odebrane'],
+                timestamp: row['Sygnatura czasowa'],
+              };
+            })
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .filter((item: any) => item.taken === '' || item.taken === undefined);
+            .filter((item: any) => item.id !== '' && (item.taken === '' || item.taken === undefined));
           resolve(items);
         } catch (e) {
           reject(e);

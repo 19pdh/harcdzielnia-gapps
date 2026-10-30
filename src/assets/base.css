@@ -68,16 +68,18 @@ main {
 /* AddItem.vue styles */
 div.add-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin: 1.5em 0;
 }
 
 div.add-item-button {
   background-color: var(--bg);
   padding: 0.5ex;
-  margin: 1.5em 0;
   border-radius: 1ex;
   border: 4px solid var(--fg);
+  margin-bottom: 0.5em;
 }
 
 div.add-item-button:hover {
@@ -114,6 +116,29 @@ button:active {
 .add-item-link * {
   padding: 0.5ex;
   margin: auto;
+}
+
+div.pickup-item-button {
+  background-color: transparent;
+  padding: 0.2em 0.5em;
+  border-radius: 1ex;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+div.pickup-item-button:hover {
+  background-color: var(--tre);
+  border-radius: 0;
+}
+
+.pickup-item-button .pickup-item-link {
+  color: var(--fg-light);
+  font-weight: normal;
+  font-size: 0.9em;
+  text-decoration: underline;
 }
 
 /* AboutView.vue styles */
@@ -184,4 +209,21 @@ img.item-detail-icon {
   .item-detail > div {
     grid-column: 2 / 3;
   }
+}
+
+/* Pickup Input styling */
+.pickup-input {
+  padding: 0.7em;
+  font-size: 1.1em;
+  width: 100%;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  background-color: var(--bg);
+  color: var(--fg);
+  border: 4px solid var(--fg);
+  border-radius: 8px;
+}
+.pickup-input:focus {
+  outline: none;
+  border-color: var(--fg-light);
 }
