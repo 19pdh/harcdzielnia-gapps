@@ -124,12 +124,14 @@ div.pickup-item-button {
   border-radius: 1ex;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
 }
 
 div.pickup-item-button:hover {
   background-color: var(--tre);
-  border: 1px solid var(--sec);
+  border-radius: 0;
 }
 
 .pickup-item-button .pickup-item-link {
@@ -211,18 +213,17 @@ img.item-detail-icon {
 
 /* Pickup Input styling */
 .pickup-input {
-  padding: 8px;
+  padding: 0.7em;
   font-size: 1.1em;
   width: 100%;
   margin-bottom: 16px;
   box-sizing: border-box;
   background-color: var(--bg);
   color: var(--fg);
-  border: 2px solid var(--fg);
+  border: 4px solid var(--fg);
   border-radius: 8px;
 }
 .pickup-input:focus {
   outline: none;
   border-color: var(--fg-light);
-  background-color: var(--tre);
 }
