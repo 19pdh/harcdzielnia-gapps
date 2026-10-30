@@ -66,46 +66,9 @@ function parseDate(dateStr) {
 }
 
 function onFormSubmit(e) {
-  try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    const range = e.range;
-    const row = range.getRow();
-    const values = e.values;
-
-    // Assuming Timestamp is in column A (index 0)
-    const timestampStr = values[0];
-    const timestampDate = parseDate(timestampStr);
-
-    if (isNaN(timestampDate.getTime())) {
-      Logger.log("Invalid timestamp: " + timestampStr);
-      return;
-    }
-
-    const code = encodeTimestamp(timestampDate.getTime());
-
-    // Find email in the form response. We assume it's one of the columns.
-    // Adjust logic if email column index is known exactly.
-    let emailAddress = "";
-    for (let i = 0; i < values.length; i++) {
-      if (values[i] && values[i].indexOf("@") > 0) {
-        emailAddress = values[i];
-        break;
-      }
-    }
-
-    if (emailAddress) {
-      const subject = "Twój kod odbioru munduru - Harcdzielnia";
-      const message = "Dziękujemy za oddanie munduru!\n\n" +
-                      "Oto twój kod odbioru, który należy zapisać i nakleić na mundur:\n\n" +
-                      "KOD: " + code + "\n\n" +
-                      "Aby ktoś mógł odebrać ten mundur, będzie musiał podać ten kod na stronie.";
-      MailApp.sendEmail(emailAddress, subject, message);
-    } else {
-      Logger.log("No email address found in submission to send the code: " + code);
-    }
-  } catch (error) {
-    Logger.log("Error in onFormSubmit: " + error.toString());
-  }
+  // Keeping function declaration for compatibility with existing triggers,
+  // but removing email logic as requested.
+  // Codes are now generated on the fly by the frontend fetching from doPost endpoint.
 }
 
 function doPost(e) {
@@ -117,6 +80,34 @@ function doPost(e) {
 
   try {
     const params = JSON.parse(e.postData.contents);
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const data = sheet.getDataRange().getValues();
+
+    if (params.action === "getRecentCodes") {
+      const oneHourAgoMs = new Date().getTime() - (60 * 60 * 1000);
+      let recentItems = [];
+
+      for (let i = 1; i < data.length; i++) {
+        const rowTimestampStr = data[i][0]; // Column A
+        if (!rowTimestampStr) continue;
+
+        const rowDate = parseDate(rowTimestampStr);
+        const rowTimeMs = rowDate.getTime();
+
+        if (!isNaN(rowTimeMs)) {
+          // Check if item was added within the last hour
+          if (rowTimeMs >= oneHourAgoMs) {
+            recentItems.push({
+              id: Math.floor(rowTimeMs / 1000).toString(),
+              code: encodeTimestamp(rowTimeMs)
+            });
+          }
+        }
+      }
+
+      return output.setContent(JSON.stringify({ success: true, codes: recentItems }));
+    }
+
     const code = params.code;
 
     if (!code) {

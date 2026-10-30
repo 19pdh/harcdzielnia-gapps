@@ -5,6 +5,7 @@ import { store } from "./store/store";
 import Home from "./pages/Home";
 import ItemDetail from "./pages/ItemDetail";
 import About from "./pages/About";
+import CodesPage from "./pages/CodesPage";
 import logoLight from "./assets/logo-light.svg";
 import pkg from "../package.json";
 
@@ -32,6 +33,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/item/:id/:name?" element={<ItemDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/kody-odbioru" element={<CodesPage />} />
           </Routes>
         </main>
 
